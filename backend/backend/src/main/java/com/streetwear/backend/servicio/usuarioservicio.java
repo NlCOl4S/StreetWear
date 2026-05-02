@@ -1,7 +1,7 @@
-package com.streetwear.backend.servicios;
+package com.streetwear.backend.servicio;
 
-import com.streetwear.backend.entidades.usuarios;
-import com.streetwear.backend.repositorios.usuarioRepositorio;
+import com.streetwear.backend.entidad.usuario;
+import com.streetwear.backend.repositorio.usuariorepositorio;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
@@ -10,17 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 @AllArgsConstructor
 @Service
 
-public class usuarioServicio {
+public class usuarioservicio {
     @Autowired
-    private final usuarioRepositorio repositorio;
+    private final usuariorepositorio repositorio;
 
     @Transactional
-    public usuarios addUsuario(usuarios usuario) {
-        usuarios usuarioGuardado = repositorio.save(usuario);
+    public usuario addUsuario(usuario usuario) {
+        usuario usuarioGuardado = repositorio.save(usuario);
 
         return usuarioGuardado;
     }
-    public usuarios getUsuario(Long id) {
+    public usuario getUsuario(Long id) {
         return repositorio.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }

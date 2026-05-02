@@ -1,8 +1,6 @@
-package com.streetwear.backend.entidades;
+package com.streetwear.backend.entidad;
 import lombok.*;
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="usuarios")
@@ -12,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @NoArgsConstructor
 @ToString
 
-public class usuarios  {
+public class usuario {
     @Id
     private Long cedula;
     private String nombre;
