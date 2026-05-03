@@ -28,10 +28,14 @@ public class ProductController {
         return productService.addProduct(product);
     }
 
+    //eliminar carrito por id
+
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
     }
+
+    //buscar producto
 
     @GetMapping("/search")
     public List<Product> searchByName(@RequestParam String name) {
