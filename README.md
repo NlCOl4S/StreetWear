@@ -3,27 +3,35 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Java-17+-orange.svg" alt="Java Version">
   <img src="https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen.svg" alt="Spring Boot">
+  <img src="https://img.shields.io/badge/Spring%20Security-OAuth2%2FJWT-blueviolet.svg" alt="Spring Security">
   <img src="https://img.shields.io/badge/Frontend-HTML5%20%7C%20CSS3-blue.svg" alt="Frontend HTML/CSS">
   <img src="https://img.shields.io/badge/Database-MySQL-yellow.svg" alt="MySQL">
   <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
 </p>
 
 ## 📖 Descripción
-**StreetWear** es una aplicación web de comercio electrónico (*e-commerce*) enfocada en la venta de ropa urbana. El proyecto cuenta con un **backend** desarrollado en Spring Boot para la gestión de datos y lógica del negocio, y un **frontend** hecho a medida con **HTML y CSS** puro para la interfaz de usuario.
+**StreetWear** es una aplicación web de comercio electrónico (*e-commerce*) enfocada en la venta de ropa urbana. El proyecto cuenta con un **backend** desarrollado en Spring Boot para la gestión de datos, lógica del negocio y seguridad robusta con OAuth2/JWT, y un **frontend** hecho a medida con **HTML y CSS** puro para la interfaz de usuario.
 
 ---
 
 ## 🚀 Características Principales
 - **Interfaz Web (Frontend):** Diseños modernos y atractivos basados en HTML5 y CSS3 para la visualización de productos y navegación de la tienda.
-- **API REST (Backend):** Estructura basada en Spring Boot y Spring Data JPA para la administración de la base de datos.
+- **API REST (Backend):** Estructura basada en Spring Boot, Spring Data JPA y Spring Security para la administración de la base de datos y control de accesos.
+- **Seguridad Avanzada:** Autenticación basada en tokens JWT y control de acceso basado en roles (`USER` y `ADMIN`) configurado mediante OAuth2 Resource Server.
 - **Persistencia de Datos:** Conexión a base de datos relacional (MySQL) para el manejo de entidades y registros del negocio.
 
 ---
 
 ## 🛠️ Tecnologías Utilizadas
-- **Backend:** Java 17+, Spring Boot, Spring Data JPA / Hibernate, Maven.
+- **Backend:** Java 17+, Spring Boot, Spring Security, OAuth2 / JWT, Spring Data JPA / Hibernate, Maven.
 - **Frontend:** HTML5, CSS3.
 - **Base de Datos:** MySQL.
+
+---
+
+## 🔐 Seguridad y Autenticación (OAuth2 / JWT)
+
+El proyecto implementa un **OAuth2 Resource Server** que valida tokens JWT externos y gestiona la seguridad de los endpoints mediante control de acceso basado en roles (`USER` y `ADMIN`), utilizando claims personalizados para la asignación de permisos.
 
 ---
 
