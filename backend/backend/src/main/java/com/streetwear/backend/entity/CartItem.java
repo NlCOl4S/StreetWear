@@ -3,8 +3,6 @@ package com.streetwear.backend.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.mapping.Join;
-
 
 @Entity
 @Table(name = "carts_items")

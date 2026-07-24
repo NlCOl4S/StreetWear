@@ -6,14 +6,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
 public class CartService {
-
-    private static final Logger log = LoggerFactory.getLogger(CartService.class);
 
 
     private final CartRepository cartRepository;
@@ -33,13 +30,6 @@ public class CartService {
 
     @Transactional
     public Cart addProduct(Long cedula, Long productId, int quantity) {
-
-        log.info("\n================================" +
-                "\nProducto agregado al carrito:" +
-                "\nUsuario cedula: {}" +
-                "\nProducto ID: {}" +
-                "\nCantidad: {}" +
-                "\n================================", cedula, productId, quantity);
 
         Cart cart = getOrCreateCart(cedula);
         Product product = productRepository.findById(productId)
@@ -64,10 +54,6 @@ public class CartService {
 
     public Cart getCart(Long cedula) {
 
-        log.info("\n================================" +
-                "\nCarrito obtenido" +
-                "\nUsuario cedula: {}" +
-                "\n================================", cedula);
         return getOrCreateCart(cedula);
 
     }
@@ -75,7 +61,10 @@ public class CartService {
     @Transactional
     public Cart removeItem(Long cedula, Long itemId) {
         Cart cart = getOrCreateCart(cedula);
-        cart.getItems().removeIf(i -> i.getId() == itemId);
+        boolean removed = cart.getItems().removeIf(i -> Objects.equals(i.getId(), itemId));
+        if (!removed){
+            throw new RuntimeException("El producto no está en el carrito");
+        }
         return cartRepository.save(cart);
     }
 
@@ -86,13 +75,10 @@ public class CartService {
                         .multiply(BigDecimal.valueOf(i.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        log.info("\n================================" +
-                "\nTotal del carrito" +
-                "\nUsuario cedula: {}" +
-                "\nTotal: {}" +
-                "\n================================", cedula, total);
 
         return total;
     }
+
+
 
 }

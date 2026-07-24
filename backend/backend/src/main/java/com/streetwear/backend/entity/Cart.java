@@ -2,7 +2,6 @@ package com.streetwear.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.mapping.Join;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +23,5 @@ public class Cart {
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> items = new ArrayList<>();
-
-
-
 
 }
