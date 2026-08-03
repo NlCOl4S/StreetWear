@@ -1,4 +1,4 @@
-package com.streetwear.backend.config;
+package com.streetwear.backend.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
