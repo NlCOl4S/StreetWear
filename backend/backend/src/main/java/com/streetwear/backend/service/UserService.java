@@ -12,19 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class UserService {
 
-    private final UserRepository repositorio;
+    private final UserRepository userRepository;
 
     @Transactional
-    public User addUsuario(User user) {
-        User userGuardado = repositorio.save(user);
+    public User addUser(User user) {
 
-        return userGuardado;
+        return userRepository.save(user);
     }
-    public User getUsuario(Long id) {
-        User user = repositorio.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    public User getUserByCedula(Long cedula) {
+        return userRepository.findById(cedula)
+                .orElseThrow(() -> new RuntimeException("User not found with cedula: " + cedula));
 
-        return user;
     }
 
 
