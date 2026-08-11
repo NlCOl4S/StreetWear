@@ -21,7 +21,7 @@ public class CartService {
         return cartRepository.findByUserCedula(cedula)
                 .orElseGet(() -> {
                     User user = userRepository.findById(cedula)
-                            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                            .orElseThrow(() -> new RuntimeException("User not found with cedula: " + cedula));
                     Cart newCart = new Cart();
                     newCart.setUser(user);
                     return cartRepository.save(newCart);
@@ -33,7 +33,7 @@ public class CartService {
 
         Cart cart = getOrCreateCart(cedula);
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + productId));
 
         cart.getItems().stream()
                 .filter(i -> i.getProduct() != null && productId.equals(i.getProduct().getId()))
@@ -63,7 +63,7 @@ public class CartService {
         Cart cart = getOrCreateCart(cedula);
         boolean removed = cart.getItems().removeIf(i -> Objects.equals(i.getId(), itemId));
         if (!removed){
-            throw new RuntimeException("El producto no está en el carrito");
+            throw new RuntimeException("The product is not in the cart");
         }
         return cartRepository.save(cart);
     }
