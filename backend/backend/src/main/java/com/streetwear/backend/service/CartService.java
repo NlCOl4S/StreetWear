@@ -1,6 +1,9 @@
 package com.streetwear.backend.service;
 
 import com.streetwear.backend.entity.*;
+import com.streetwear.backend.exception.CartItemNotFoundException;
+import com.streetwear.backend.exception.ProductNotFoundException;
+import com.streetwear.backend.exception.UserNotFoundException;
 import com.streetwear.backend.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +24,7 @@ public class CartService {
         return cartRepository.findByUserCedula(cedula)
                 .orElseGet(() -> {
                     User user = userRepository.findById(cedula)
-                            .orElseThrow(() -> new RuntimeException("User not found with cedula: " + cedula));
+                            .orElseThrow(() -> new UserNotFoundException(cedula));
                     Cart newCart = new Cart();
                     newCart.setUser(user);
                     return cartRepository.save(newCart);
@@ -33,7 +36,7 @@ public class CartService {
 
         Cart cart = getOrCreateCart(cedula);
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + productId));
+                .orElseThrow(() -> new ProductNotFoundException(productId));
 
         cart.getItems().stream()
                 .filter(i -> i.getProduct() != null && productId.equals(i.getProduct().getId()))
@@ -63,7 +66,7 @@ public class CartService {
         Cart cart = getOrCreateCart(cedula);
         boolean removed = cart.getItems().removeIf(i -> Objects.equals(i.getId(), itemId));
         if (!removed){
-            throw new RuntimeException("The product is not in the cart");
+            throw new CartItemNotFoundException(itemId);
         }
         return cartRepository.save(cart);
     }

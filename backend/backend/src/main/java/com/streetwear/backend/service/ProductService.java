@@ -1,6 +1,7 @@
 package com.streetwear.backend.service;
 
 import com.streetwear.backend.entity.Product;
+import com.streetwear.backend.exception.ProductNotFoundException;
 import com.streetwear.backend.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class ProductService {
 
     public Product getProductById(Long id) {
         return productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     public List<Product> getAllProducts() {
@@ -36,7 +37,7 @@ public class ProductService {
     @Transactional
     public void deleteProduct(Long id) {
         if (!productRepository.existsById(id)) {
-            throw new RuntimeException("Product not found with id: " + id);
+            throw new ProductNotFoundException(id);
         }
         productRepository.deleteById(id);
     }

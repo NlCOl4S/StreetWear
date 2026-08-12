@@ -1,6 +1,7 @@
 package com.streetwear.backend.service;
 
 import com.streetwear.backend.entity.User;
+import com.streetwear.backend.exception.UserNotFoundException;
 import com.streetwear.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class UserService {
     }
     public User getUserByCedula(Long cedula) {
         return userRepository.findById(cedula)
-                .orElseThrow(() -> new RuntimeException("User not found with cedula: " + cedula));
+                .orElseThrow(() -> new UserNotFoundException(cedula));
 
     }
 
