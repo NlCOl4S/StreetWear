@@ -21,6 +21,7 @@ public class CartController {
     @GetMapping("/{cedula}")
     public ResponseEntity<CartResponseDTO> getCart(@PathVariable Long cedula) {
         Cart cart =  cartService.getCart(cedula);
+
         return ResponseEntity.ok(CartMapper.toResponseDTO(cart));
     }
 
@@ -29,18 +30,21 @@ public class CartController {
         Long productId = cartItemRequestDTO.productId();
         int quantity = cartItemRequestDTO.quantity();
         Cart cart = cartService.addProduct(cedula,productId,quantity);
+
         return ResponseEntity.ok(CartMapper.toResponseDTO(cart));
     }
 
     @DeleteMapping("/{cedula}/items/{itemId}")
     public ResponseEntity<CartResponseDTO> removeItem(@PathVariable Long cedula, @PathVariable Long itemId) {
         Cart cart = cartService.removeItem(cedula, itemId);
+
         return ResponseEntity.ok(CartMapper.toResponseDTO(cart));
     }
 
     @GetMapping("/{cedula}/total")
     public ResponseEntity<BigDecimal> getTotal(@PathVariable Long cedula) {
         BigDecimal total =  cartService.calculateTotal(cedula);
+
         return ResponseEntity.ok(total);
     }
 }

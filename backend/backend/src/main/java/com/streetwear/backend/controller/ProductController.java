@@ -7,6 +7,7 @@ import com.streetwear.backend.mapper.ProductMapper;
 import com.streetwear.backend.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -22,8 +23,9 @@ public class ProductController {
     public ResponseEntity<ProductResponseDTO> addProduct(@Valid @RequestBody ProductRequestDTO productRequestDTO) {
         Product product = ProductMapper.toEntity(productRequestDTO);
         Product savedProduct = productService.addProduct(product);
+        ProductResponseDTO productResponseDTO = ProductMapper.toResponseDTO(savedProduct);
 
-        return ResponseEntity.ok(ProductMapper.toResponseDTO(savedProduct));
+        return new ResponseEntity<>(productResponseDTO, HttpStatus.CREATED);
     }
 
     @GetMapping
