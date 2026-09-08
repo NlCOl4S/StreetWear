@@ -35,6 +35,22 @@ public class ProductService {
     }
 
     @Transactional
+    public Product updateProduct(Long id, Product product){
+        return productRepository.findById(id)
+                .map(product1 -> {
+                    product1.setName(product.getName());
+                    product1.setDescription(product.getDescription());
+                    product1.setPrice(product.getPrice());
+                    product1.setStock(product.getStock());
+                    product1.setSize(product.getSize());
+                    product1.setCategory(product.getCategory());
+                    return productRepository.save(product1);
+
+                })
+                .orElseThrow(() -> new ProductNotFoundException(id));
+    }
+
+    @Transactional
     public void deleteProduct(Long id) {
         if (!productRepository.existsById(id)) {
             throw new ProductNotFoundException(id);
