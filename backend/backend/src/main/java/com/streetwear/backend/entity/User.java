@@ -1,20 +1,30 @@
 package com.streetwear.backend.entity;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="users")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@ToString
 
 public class User {
+
     @Id
-    private Long cedula;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String cedula;
+
     private String nombre;
-    private int edad;
+
+    @NotNull
+    @Column(nullable = false)
+    private LocalDate fechaNacimiento;
+
     private String apellidos;
     private String direccion;
 

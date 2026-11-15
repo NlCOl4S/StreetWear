@@ -2,13 +2,14 @@ package com.streetwear.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.*;
 
 @Entity
 @Table(name = "carts_items")
-@Getter @Setter
-@AllArgsConstructor @NoArgsConstructor
-@ToString
+@Getter
+@Setter
+@NoArgsConstructor
 
 public class CartItem {
 
@@ -25,6 +26,8 @@ public class CartItem {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @Min(1)
+    @Column(nullable = false)
     private int quantity;
 
 }

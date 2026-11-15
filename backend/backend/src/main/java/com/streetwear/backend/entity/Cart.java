@@ -2,17 +2,17 @@ package com.streetwear.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "carts")
-@Getter @Setter
-@AllArgsConstructor @NoArgsConstructor
-@ToString
+@Getter
+@Setter
+@NoArgsConstructor
 
 public class Cart {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
