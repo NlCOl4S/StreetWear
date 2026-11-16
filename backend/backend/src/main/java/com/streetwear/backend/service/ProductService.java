@@ -6,7 +6,6 @@ import com.streetwear.backend.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
@@ -41,8 +40,6 @@ public class ProductService {
                     product1.setName(product.getName());
                     product1.setDescription(product.getDescription());
                     product1.setPrice(product.getPrice());
-                    product1.setStock(product.getStock());
-                    product1.setSize(product.getSize());
                     product1.setCategory(product.getCategory());
                     return productRepository.save(product1);
 

@@ -2,6 +2,7 @@ package com.streetwear.backend.controller;
 
 import com.streetwear.backend.dto.product.ProductRequestDTO;
 import com.streetwear.backend.dto.product.ProductResponseDTO;
+import com.streetwear.backend.dto.product.ProductUpdateDTO;
 import com.streetwear.backend.entity.Product;
 import com.streetwear.backend.mapper.ProductMapper;
 import com.streetwear.backend.service.ProductService;
@@ -56,8 +57,8 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable Long id,@Valid @RequestBody ProductRequestDTO productRequestDTO){
-        Product product = ProductMapper.toEntity(productRequestDTO);
+    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable Long id,@Valid @RequestBody ProductUpdateDTO productUpdateDTO){
+        Product product = ProductMapper.toEntity(productUpdateDTO);
         Product updatedProduct = productService.updateProduct(id,product);
 
         return ResponseEntity.ok(ProductMapper.toResponseDTO(updatedProduct));

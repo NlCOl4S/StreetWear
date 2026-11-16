@@ -8,5 +8,5 @@ import java.util.Optional;
 @Repository
 
 public interface CartRepository extends JpaRepository<Cart, Long> {
-    Optional<Cart> findByUserCedula(Long cedula);
+    Optional<Cart> findByUserCedula(String cedula);
 }

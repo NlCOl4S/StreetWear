@@ -11,7 +11,7 @@ public class UserMapper {
         return new UserResponseDTO(
                 user.getCedula(),
                 user.getNombre(),
-                user.getEdad(),
+                user.getFechaNacimiento(),
                 user.getApellidos(),
                 user.getDireccion()
         );
@@ -22,7 +22,7 @@ public class UserMapper {
         User user = new User();
         user.setCedula(dto.cedula());
         user.setNombre(dto.nombre());
-        user.setEdad(dto.edad());
+        user.setFechaNacimiento(dto.fechaNacimiento());
         user.setApellidos(dto.apellidos());
         user.setDireccion(dto.direccion());
 

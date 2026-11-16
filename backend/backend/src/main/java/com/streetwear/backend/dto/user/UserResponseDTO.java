@@ -1,10 +1,13 @@
 package com.streetwear.backend.dto.user;
 
+import java.time.LocalDate;
+
 public record UserResponseDTO (
-        Long cedula,
+        String cedula,
         String nombre,
-        int edad,
+        LocalDate fechaNacimiento,
         String apellidos,
         String direccion
 ){
 }
+

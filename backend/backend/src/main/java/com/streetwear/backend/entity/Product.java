@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 
 public class Product {
 
@@ -20,8 +19,6 @@ public class Product {
     private String name;
     private String description;
     private BigDecimal price;
-    private int stock;
-    private String size;
     private String category;
 
 }

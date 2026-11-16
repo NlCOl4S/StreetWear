@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @RequiredArgsConstructor
 @Service
 
@@ -20,12 +19,10 @@ public class UserService {
 
         return userRepository.save(user);
     }
-    public User getUserByCedula(Long cedula) {
-        return userRepository.findById(cedula)
+    public User getUserByCedula(String cedula) {
+        return userRepository.findByCedula(cedula)
                 .orElseThrow(() -> new UserNotFoundException(cedula));
 
     }
-
-
 
 }

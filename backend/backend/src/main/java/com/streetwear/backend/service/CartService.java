@@ -15,15 +15,14 @@ import java.util.Objects;
 @AllArgsConstructor
 public class CartService {
 
-
     private final CartRepository cartRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
-    private Cart getOrCreateCart(Long cedula) {
+    private Cart getOrCreateCart(String cedula) {
         return cartRepository.findByUserCedula(cedula)
                 .orElseGet(() -> {
-                    User user = userRepository.findById(cedula)
+                    User user = userRepository.findByCedula(cedula)
                             .orElseThrow(() -> new UserNotFoundException(cedula));
                     Cart newCart = new Cart();
                     newCart.setUser(user);
@@ -32,7 +31,7 @@ public class CartService {
     }
 
     @Transactional
-    public Cart addProduct(Long cedula, Long productId, int quantity) {
+    public Cart addProduct(String cedula, Long productId, int quantity) {
 
         Cart cart = getOrCreateCart(cedula);
         Product product = productRepository.findById(productId)
@@ -55,14 +54,14 @@ public class CartService {
         return cartRepository.save(cart);
     }
 
-    public Cart getCart(Long cedula) {
+    public Cart getCart(String cedula) {
 
         return getOrCreateCart(cedula);
 
     }
 
     @Transactional
-    public Cart removeItem(Long cedula, Long itemId) {
+    public Cart removeItem(String cedula, Long itemId) {
         Cart cart = getOrCreateCart(cedula);
         boolean removed = cart.getItems().removeIf(i -> Objects.equals(i.getId(), itemId));
         if (!removed){
@@ -71,7 +70,7 @@ public class CartService {
         return cartRepository.save(cart);
     }
 
-    public BigDecimal calculateTotal(Long cedula) {
+    public BigDecimal calculateTotal(String cedula) {
         Cart cart = getOrCreateCart(cedula);
         BigDecimal total = cart.getItems().stream()
                 .map(i -> i.getProduct().getPrice()

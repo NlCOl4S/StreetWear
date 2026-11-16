@@ -3,7 +3,6 @@ package com.streetwear.backend.mapper;
 import com.streetwear.backend.dto.cart.CartItemResponseDTO;
 import com.streetwear.backend.dto.cart.CartResponseDTO;
 import com.streetwear.backend.entity.Cart;
-
 import java.util.List;
 
 public class CartMapper {
@@ -21,7 +20,7 @@ public class CartMapper {
 
         return new CartResponseDTO(
                 cart.getId(),
-                cart.getUser().getCedula(),
+                cart.getUser().getId(),
                 items
         );
 

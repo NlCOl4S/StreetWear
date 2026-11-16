@@ -7,8 +7,6 @@ public record ProductResponseDTO (
          String name,
          String description,
          BigDecimal price,
-         int stock,
-         String size,
          String category
 
 ){

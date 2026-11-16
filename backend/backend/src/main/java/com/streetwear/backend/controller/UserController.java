@@ -19,8 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{cedula}")
-    public ResponseEntity<UserResponseDTO> getUserByCedula(@PathVariable Long cedula) {
-
+    public ResponseEntity<UserResponseDTO> getUserByCedula(@PathVariable String cedula) {
         User user = userService.getUserByCedula(cedula);
 
         return ResponseEntity.ok(UserMapper.toResponseDTO(user));
