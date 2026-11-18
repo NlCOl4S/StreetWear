@@ -35,7 +35,4 @@ public class ProductVariant {
     @Column(nullable = false)
     private int stock;
 
-
-
-
 }
